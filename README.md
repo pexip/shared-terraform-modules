@@ -10,6 +10,12 @@ A module for generating standardized tags for Pexip projects in GCP.
 
 See [pexip_project_tags/README.md](pexip_project_tags/README.md) for detailed usage information.
 
+### pam
+
+A module for creating Google Cloud Privileged Access Manager (PAM) entitlements for just-in-time access control.
+
+See [pam/README.md](pam/README.md) for detailed usage information.
+
 ## Module Versioning
 
 When using these modules, it's recommended to reference a specific git tag or commit SHA:
