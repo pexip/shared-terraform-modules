@@ -1,3 +1,3 @@
 output "tags" {
-  value = join(var.extra_tags, {managed_by: var.managed_by}, {product: var.product}, {environment: var.environment}, {owner: var.owner}, {team: var.team})
+  value = join(var.extra_tags, {managed_by: var.managed_by}, {product: var.product}, {environment: var.environment}, {owner: var.owner}, {team: var.team}, {cost_center: var.cost_center})
 }

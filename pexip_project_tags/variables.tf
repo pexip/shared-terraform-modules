@@ -1,7 +1,7 @@
 locals {
   environments = jsondecode(file("${path.module}/environments.json"))
   products     = jsondecode(file("${path.module}/products.json"))
-  teams        = jsondecode(file("${path.module}/teams.json"))
+  cost_centers = jsondecode(file("${path.module}/cost_centers.json"))
 }
 
 check "owner_or_team_set" {
@@ -11,12 +11,12 @@ check "owner_or_team_set" {
   }
 }
 
-variable "team" {
+variable "cost_center" {
   type    = string
   default = null
   validation {
-    condition     = var.team == null ? true : contains(local.teams, var.team)
-    error_message = "Team must be one of the values defined in teams.json."
+    condition     = var.cost_center == null ? true : contains(local.cost_centers, var.cost_center)
+    error_message = "Cost center must be one of the values defined in cost_centers.json."
   }
 }
 
@@ -34,6 +34,11 @@ variable "environment" {
     condition     = contains(local.environments, var.environment)
     error_message = "Environment must be one of the values defined in environments.json."
   }
+}
+
+variable "team" {
+  type    = string
+  default = null
 }
 
 variable "owner" {

@@ -1,6 +1,6 @@
 # Pexip Project Tags Module
 
-A Terraform module for generating standardized tags for Pexip projects in GCP.
+A Terraform module for generating standardized labels/tags for Pexip projects in GCP and Azure.
 
 ## Features
 
@@ -15,14 +15,14 @@ A Terraform module for generating standardized tags for Pexip projects in GCP.
 module "project_tags" {
   source = "git::https://github.com/pexip/shared-terraform-modules.git//pexip_project_tags"
 
-  team        = "dops"
+  team        = "vcops"
+  owner       = "john.doe@pexip.com"
   product     = "shared"
   environment = "prod"
   managed_by  = "pexip/infrastructure-repo"
-  owner       = "john.doe@pexip.com"
+  cost_center = "dops"
 
   extra_tags = {
-    cost_center = "engineering"
     compliance  = "sox"
   }
 }
@@ -30,14 +30,15 @@ module "project_tags" {
 
 ## Variables
 
-| Name | Type | Required | Default | Description |
-|------|------|----------|---------|-------------|
-| `team` | string | no* | null | Team responsible for the project. Must be one of the values defined in `teams.json` |
-| `product` | string | yes | - | Product name. Must be one of the values defined in `products.json` |
-| `environment` | string | yes | - | Environment name. Must be one of the values defined in `environments.json` |
-| `owner` | string | no* | null | Email of the project owner |
-| `managed_by` | string | yes | - | GitHub repository hosting terraform code managing this project |
-| `extra_tags` | map(string) | no | {} | Additional custom tags to include |
+| Name          | Type | Required | Default | Description                                                                                                                |
+|---------------|------|----------|---------|----------------------------------------------------------------------------------------------------------------------------|
+| `team`        | string | no*      | null | Team responsible for the project. Must be one of the values defined in `teams.json`                                        |
+| `owner`       | string | no*      | null | Email of the project owner                                                                                                 |
+| `product`     | string | yes      | - | Product name. Must be one of the values defined in `products.json`                                                         |
+| `environment` | string | yes      | - | Environment name. Must be one of the values defined in `environments.json`                                                 |
+| `managed_by`  | string | yes      | - | GitHub repository hosting terraform code managing this project                                                             |
+| `cost_center` | string | yes      | null | Cost center where the costs for this project should be allocated. Must be one of the values defined in `cost_centers.json` |
+| `extra_tags`  | map(string) | no       | {} | Additional custom tags to include                                                                                          |
 
 \* Either `team` or `owner` must be specified
 
@@ -48,12 +49,6 @@ module "project_tags" {
 - `dev` - Development environment
 - `staging` - Staging environment
 - `prod` - Production environment
-
-**Teams:**
-- `dops`, `prod`, `head`, `ukir`, `rdge`, `publ`, `enga`, `rdcc`, `rdme`, `sema`, `aunz`, `asia`, `rdsc`, `nord`, `cent`
-
-**Products:**
-- `shared`, `midgard`, `cvp`, `vmr`, `google`, `teams`, `vpaas`, `ppi`, `corp`, `beelday`, `kinly-meet`, `vhs`, `infinity`, `erm`, `managed-services`, `courts-core`
 
 ## Outputs
 
@@ -69,8 +64,8 @@ tags = {
   product     = "shared"
   environment = "prod"
   owner       = "john.doe@pexip.com"
-  team        = "dops"
-  cost_center = "engineering"
+  team        = "vcops"
+  cost_center = "dops"
   compliance  = "sox"
 }
 ```
