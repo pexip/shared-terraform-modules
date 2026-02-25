@@ -16,6 +16,12 @@ A module for creating Google Cloud Privileged Access Manager (PAM) entitlements 
 
 See [pam/README.md](pam/README.md) for detailed usage information.
 
+### workload_identity_provider
+
+A module for configuring GCP Workload Identity Federation for GitHub Actions, enabling keyless authentication without long-lived service account keys.
+
+See [workload_identity_provider/README.md](workload_identity_provider/README.md) for detailed usage information.
+
 ## Module Versioning
 
 When using these modules, it's recommended to reference a specific git tag or commit SHA:
